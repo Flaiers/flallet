@@ -1,0 +1,33 @@
+# Compile directory
+bin/
+
+# Docs
+*.md
+LICENSE
+
+# GoLand
+.idea/
+
+# VSCode
+.vscode/
+
+# Makefile
+Makefile
+
+# EditorConfig
+.editorconfig
+
+# GolangCI
+.golangci.yml
+
+# Git
+.git/
+.github/
+.gitignore
+.gitattributes
+
+# Docker
+docker/
+Dockerfile
+.dockerignore
+docker-compose.*

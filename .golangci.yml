@@ -1,0 +1,36 @@
+run:
+  skip-dirs:
+    - docs
+    - migrations
+
+issues:
+  exclude-rules:
+    - path: internal/controller/http
+      linters:
+        - godot
+
+linters:
+  enable-all: true
+  disable:
+    - gci
+    - wsl
+    - dupl
+    - wrapcheck
+    - nosnakecase
+    - deadcode
+    - scopelint
+    - interfacer
+    - varcheck
+    - maligned
+    - golint
+    - prealloc
+    - nonamedreturns
+    - structcheck
+    - ifshort
+    - goerr113
+    - rowserrcheck
+    - sqlclosecheck
+    - wastedassign
+    - exhaustruct
+    - varnamelen
+    - exhaustivestruct
