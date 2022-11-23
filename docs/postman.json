@@ -1,0 +1,1357 @@
+{
+	"info": {
+		"_postman_id": "28011a3a-dfb7-47d4-afab-35ec608e8674",
+		"name": "Flallet API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15305544"
+	},
+	"item": [
+		{
+			"name": "v1",
+			"item": [
+				{
+					"name": "getCSVReport",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"month\": 11,\n    \"year\": 2022\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/reports/csv",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"reports",
+								"csv"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"month\": 11,\n    \"year\": 2022\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/api/v1/reports/csv",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"reports",
+										"csv"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "77"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": ""
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"url\": \"https://flaiers.s3.amazonaws.com/flallet/2022-11-03-06-41-50.csv\"\n}"
+						},
+						{
+							"name": "404 Not Found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"month\": 10,\n    \"year\": 2022\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/api/v1/reports/csv",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"reports",
+										"csv"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "43"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": ""
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": true,\n    \"message\": \"report not found\"\n}"
+						}
+					]
+				},
+				{
+					"name": "readUserBalance",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/v1/users/{{userId}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"{{userId}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/api/v1/users/{{userId}}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"users",
+										"{{userId}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "103"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": ""
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"d2786a0f-1d15-4345-9ca9-07391385eb8a\",\n    \"balance\": 0,\n    \"createdAt\": \"2022-11-03T03:15:33.42014+03:00\"\n}"
+						}
+					]
+				},
+				{
+					"name": "readUserTransactions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/v1/transactions?userId={{userId}}&page=1&size=10&orderByCreatedAt=desc",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"transactions"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "{{userId}}"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								},
+								{
+									"key": "orderByAmount",
+									"value": "asc",
+									"disabled": true
+								},
+								{
+									"key": "orderByCreatedAt",
+									"value": "desc"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 OK Default",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/api/v1/transactions?userId={{userId}}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"transactions"
+									],
+									"query": [
+										{
+											"key": "userId",
+											"value": "{{userId}}"
+										},
+										{
+											"key": "page",
+											"value": "1",
+											"disabled": true
+										},
+										{
+											"key": "size",
+											"value": "50",
+											"disabled": true
+										},
+										{
+											"key": "orderByAmount",
+											"value": "asc",
+											"disabled": true
+										},
+										{
+											"key": "orderByCreatedAt",
+											"value": "desc",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "938"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": ""
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"items\": [\n        {\n            \"id\": \"c0d800a1-adc2-4e5b-b3a3-3ba1efaa362e\",\n            \"type\": \"accrual\",\n            \"status\": \"approved\",\n            \"amount\": 100,\n            \"userId\": \"d2786a0f-1d15-4345-9ca9-07391385eb8a\",\n            \"orderId\": null,\n            \"serviceId\": null,\n            \"createdAt\": \"2022-11-03T05:33:43.748259+03:00\"\n        },\n        {\n            \"id\": \"be4a8e00-7804-4c97-9fc5-b751b00892b8\",\n            \"type\": \"withdrawal\",\n            \"status\": \"approved\",\n            \"amount\": 100,\n            \"userId\": \"d2786a0f-1d15-4345-9ca9-07391385eb8a\",\n            \"orderId\": null,\n            \"serviceId\": null,\n            \"createdAt\": \"2022-11-03T05:34:02.145811+03:00\"\n        },\n        {\n            \"id\": \"2ce0df10-f8ae-4acf-a41c-9d3453bc6a34\",\n            \"type\": \"accrual\",\n            \"status\": \"approved\",\n            \"amount\": 100,\n            \"userId\": \"d2786a0f-1d15-4345-9ca9-07391385eb8a\",\n            \"orderId\": null,\n            \"serviceId\": null,\n            \"createdAt\": \"2022-11-03T05:34:11.686063+03:00\"\n        },\n        {\n            \"id\": \"3d29af7a-a4d1-4a00-a50a-e6a9036b3916\",\n            \"type\": \"withdrawal\",\n            \"status\": \"approved\",\n            \"amount\": 100,\n            \"userId\": \"d2786a0f-1d15-4345-9ca9-07391385eb8a\",\n            \"orderId\": null,\n            \"serviceId\": null,\n            \"createdAt\": \"2022-11-03T05:34:15.283762+03:00\"\n        }\n    ],\n    \"page\": 1,\n    \"size\": 50,\n    \"total\": 4\n}"
+						},
+						{
+							"name": "200 OK Custom",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/api/v1/transactions?userId={{userId}}&page=1&size=10&orderByCreatedAt=desc",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"transactions"
+									],
+									"query": [
+										{
+											"key": "userId",
+											"value": "{{userId}}"
+										},
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "size",
+											"value": "10"
+										},
+										{
+											"key": "orderByAmount",
+											"value": "asc",
+											"disabled": true
+										},
+										{
+											"key": "orderByCreatedAt",
+											"value": "desc"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "938"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": ""
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"items\": [\n        {\n            \"id\": \"3d29af7a-a4d1-4a00-a50a-e6a9036b3916\",\n            \"type\": \"withdrawal\",\n            \"status\": \"approved\",\n            \"amount\": 100,\n            \"userId\": \"d2786a0f-1d15-4345-9ca9-07391385eb8a\",\n            \"orderId\": null,\n            \"serviceId\": null,\n            \"createdAt\": \"2022-11-03T05:34:15.283762+03:00\"\n        },\n        {\n            \"id\": \"2ce0df10-f8ae-4acf-a41c-9d3453bc6a34\",\n            \"type\": \"accrual\",\n            \"status\": \"approved\",\n            \"amount\": 100,\n            \"userId\": \"d2786a0f-1d15-4345-9ca9-07391385eb8a\",\n            \"orderId\": null,\n            \"serviceId\": null,\n            \"createdAt\": \"2022-11-03T05:34:11.686063+03:00\"\n        },\n        {\n            \"id\": \"be4a8e00-7804-4c97-9fc5-b751b00892b8\",\n            \"type\": \"withdrawal\",\n            \"status\": \"approved\",\n            \"amount\": 100,\n            \"userId\": \"d2786a0f-1d15-4345-9ca9-07391385eb8a\",\n            \"orderId\": null,\n            \"serviceId\": null,\n            \"createdAt\": \"2022-11-03T05:34:02.145811+03:00\"\n        },\n        {\n            \"id\": \"c0d800a1-adc2-4e5b-b3a3-3ba1efaa362e\",\n            \"type\": \"accrual\",\n            \"status\": \"approved\",\n            \"amount\": 100,\n            \"userId\": \"d2786a0f-1d15-4345-9ca9-07391385eb8a\",\n            \"orderId\": null,\n            \"serviceId\": null,\n            \"createdAt\": \"2022-11-03T05:33:43.748259+03:00\"\n        }\n    ],\n    \"page\": 1,\n    \"size\": 10,\n    \"total\": 4\n}"
+						},
+						{
+							"name": "200 OK Null Items",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/api/v1/transactions?userId={{userId}}&page=10&size=10",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"transactions"
+									],
+									"query": [
+										{
+											"key": "userId",
+											"value": "{{userId}}"
+										},
+										{
+											"key": "page",
+											"value": "10"
+										},
+										{
+											"key": "size",
+											"value": "10"
+										},
+										{
+											"key": "orderByAmount",
+											"value": "asc",
+											"disabled": true
+										},
+										{
+											"key": "orderByCreatedAt",
+											"value": "desc",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "44"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": ""
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"items\": null,\n    \"page\": 10,\n    \"size\": 10,\n    \"total\": 0\n}"
+						}
+					]
+				},
+				{
+					"name": "accrueUserBalance",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"amount\": 100\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/users/{{userId}}/accrue",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"{{userId}}",
+								"accrue"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"amount\": 100\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/api/v1/users/{{userId}}/accrual",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"users",
+										"{{userId}}",
+										"accrual"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "105"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": ""
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"d2786a0f-1d15-4345-9ca9-07391385eb8a\",\n    \"balance\": 100,\n    \"createdAt\": \"2022-11-03T03:15:33.42014+03:00\"\n}"
+						}
+					]
+				},
+				{
+					"name": "withdrawUserBalance",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"amount\": 100\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/users/{{userId}}/withdraw",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"{{userId}}",
+								"withdraw"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"amount\": 100\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/api/v1/users/{{userId}}/withdrawal",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"users",
+										"{{userId}}",
+										"withdrawal"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "103"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": ""
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"d2786a0f-1d15-4345-9ca9-07391385eb8a\",\n    \"balance\": 0,\n    \"createdAt\": \"2022-11-03T03:15:33.42014+03:00\"\n}"
+						},
+						{
+							"name": "402 Balance",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"amount\": 100\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/api/v1/users/{{userId}}/withdraw",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"users",
+										"{{userId}}",
+										"withdraw"
+									]
+								}
+							},
+							"status": "Payment Required",
+							"code": 402,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "53"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": ""
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": true,\n    \"message\": \"user balance is not enough\"\n}"
+						}
+					]
+				},
+				{
+					"name": "transferUserBalance",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"amount\": 100,\n    \"userId\": \"0f3b853f-07fc-4abd-8865-30f1f8995bb8\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/users/{{userId}}/transfer",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"{{userId}}",
+								"transfer"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"amount\": 100,\n    \"userId\": \"0f3b853f-07fc-4abd-8865-30f1f8995bb8\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/api/v1/users/{{userId}}/transfer",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"users",
+										"{{userId}}",
+										"transfer"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "104"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": ""
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"d2786a0f-1d15-4345-9ca9-07391385eb8a\",\n    \"balance\": 0,\n    \"createdAt\": \"2022-11-03T03:15:33.42014+03:00\"\n}"
+						},
+						{
+							"name": "402 Balance",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"amount\": 100,\n    \"userId\": \"0f3b853f-07fc-4abd-8865-30f1f8995bb8\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/api/v1/users/{{userId}}/transfer",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"users",
+										"{{userId}}",
+										"transfer"
+									]
+								}
+							},
+							"status": "Payment Required",
+							"code": 402,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "53"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": ""
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": true,\n    \"message\": \"user balance is not enough\"\n}"
+						}
+					]
+				},
+				{
+					"name": "createUserReservation",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"amount\": 100,\n    \"userId\": \"d2786a0f-1d15-4345-9ca9-07391385eb8a\",\n    \"orderId\": \"df9cd8a1-a995-48b6-b5da-ca40a1add11a\",\n    \"serviceId\": \"85ea9b60-7085-4cc7-99e0-73cd5ee2c7bf\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/reservations",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"reservations"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"amount\": 100,\n    \"userId\": \"d2786a0f-1d15-4345-9ca9-07391385eb8a\",\n    \"orderId\": \"df9cd8a1-a995-48b6-b5da-ca40a1add11a\",\n    \"serviceId\": \"85ea9b60-7085-4cc7-99e0-73cd5ee2c7bf\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/api/v1/reservations",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"reservations"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "253"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": ""
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"3a77714e-6ff9-49fb-9162-2a2105adcc15\",\n    \"amount\": 100,\n    \"userId\": \"d2786a0f-1d15-4345-9ca9-07391385eb8a\",\n    \"orderId\": \"df9cd8a1-a995-48b6-b5da-ca40a1add11a\",\n    \"serviceId\": \"85ea9b60-7085-4cc7-99e0-73cd5ee2c7bf\",\n    \"createdAt\": \"2022-11-03T03:27:23.008337+03:00\"\n}"
+						},
+						{
+							"name": "402 Balance",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"amount\": 100,\n    \"userId\": \"d2786a0f-1d15-4345-9ca9-07391385eb8a\",\n    \"orderId\": \"df9cd8a1-a995-48b6-b5da-ca40a1add11a\",\n    \"serviceId\": \"85ea9b60-7085-4cc7-99e0-73cd5ee2c7bf\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/api/v1/reservations",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"reservations"
+									]
+								}
+							},
+							"status": "Payment Required",
+							"code": 402,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "53"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": ""
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": true,\n    \"message\": \"user balance is not enough\"\n}"
+						}
+					]
+				},
+				{
+					"name": "rejectUserReservation",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"amount\": 100,\n    \"userId\": \"d2786a0f-1d15-4345-9ca9-07391385eb8a\",\n    \"orderId\": \"df9cd8a1-a995-48b6-b5da-ca40a1add11a\",\n    \"serviceId\": \"85ea9b60-7085-4cc7-99e0-73cd5ee2c7bf\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/reservations/reject",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"reservations",
+								"reject"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"amount\": 100,\n    \"userId\": \"d2786a0f-1d15-4345-9ca9-07391385eb8a\",\n    \"orderId\": \"df9cd8a1-a995-48b6-b5da-ca40a1add11a\",\n    \"serviceId\": \"85ea9b60-7085-4cc7-99e0-73cd5ee2c7bf\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/api/v1/reservations/reject",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"reservations",
+										"reject"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "253"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": ""
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"3a77714e-6ff9-49fb-9162-2a2105adcc15\",\n    \"amount\": 100,\n    \"userId\": \"d2786a0f-1d15-4345-9ca9-07391385eb8a\",\n    \"orderId\": \"df9cd8a1-a995-48b6-b5da-ca40a1add11a\",\n    \"serviceId\": \"85ea9b60-7085-4cc7-99e0-73cd5ee2c7bf\",\n    \"createdAt\": \"2022-11-03T03:27:23.008337+03:00\"\n}"
+						},
+						{
+							"name": "404 Not Found",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"amount\": 100,\n    \"userId\": \"d2786a0f-1d15-4345-9ca9-07391385eb8a\",\n    \"orderId\": \"df9cd8a1-a995-48b6-b5da-ca40a1add11a\",\n    \"serviceId\": \"85ea9b60-7085-4cc7-99e0-73cd5ee2c7bf\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/api/v1/reservations/reject",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"reservations",
+										"reject"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "43"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": ""
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": true,\n    \"message\": \"record not found\"\n}"
+						}
+					]
+				},
+				{
+					"name": "approveUserReservation",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"amount\": 100,\n    \"userId\": \"d2786a0f-1d15-4345-9ca9-07391385eb8a\",\n    \"orderId\": \"df9cd8a1-a995-48b6-b5da-ca40a1add11a\",\n    \"serviceId\": \"85ea9b60-7085-4cc7-99e0-73cd5ee2c7bf\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/reservations/approve",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"reservations",
+								"approve"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"amount\": 100,\n    \"userId\": \"d2786a0f-1d15-4345-9ca9-07391385eb8a\",\n    \"orderId\": \"df9cd8a1-a995-48b6-b5da-ca40a1add11a\",\n    \"serviceId\": \"85ea9b60-7085-4cc7-99e0-73cd5ee2c7bf\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/api/v1/reservations/approve",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"reservations",
+										"approve"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "253"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": ""
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"3a77714e-6ff9-49fb-9162-2a2105adcc15\",\n    \"amount\": 100,\n    \"userId\": \"d2786a0f-1d15-4345-9ca9-07391385eb8a\",\n    \"orderId\": \"df9cd8a1-a995-48b6-b5da-ca40a1add11a\",\n    \"serviceId\": \"85ea9b60-7085-4cc7-99e0-73cd5ee2c7bf\",\n    \"createdAt\": \"2022-11-03T03:27:23.008337+03:00\"\n}"
+						},
+						{
+							"name": "404 Not Found",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"amount\": 100,\n    \"userId\": \"d2786a0f-1d15-4345-9ca9-07391385eb8a\",\n    \"orderId\": \"df9cd8a1-a995-48b6-b5da-ca40a1add11a\",\n    \"serviceId\": \"85ea9b60-7085-4cc7-99e0-73cd5ee2c7bf\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/api/v1/reservations/approve",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"reservations",
+										"approve"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "43"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": ""
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": true,\n    \"message\": \"record not found\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "healthcheck",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/healthcheck",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"healthcheck"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "200 OK",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/healthcheck",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"healthcheck"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "2"
+						},
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": ""
+						},
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true"
+						}
+					],
+					"cookie": [],
+					"body": "OK"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "localhost:3000",
+			"type": "string"
+		},
+		{
+			"key": "userId",
+			"value": "d2786a0f-1d15-4345-9ca9-07391385eb8a"
+		}
+	]
+}
