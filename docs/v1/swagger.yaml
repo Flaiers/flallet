@@ -1,0 +1,536 @@
+basePath: /api/v1
+definitions:
+  dto.ReportFilter:
+    properties:
+      month:
+        type: integer
+      year:
+        type: integer
+    required:
+    - month
+    - year
+    type: object
+  dto.ReportRead:
+    properties:
+      url:
+        type: string
+    type: object
+  dto.ReservationCreate:
+    properties:
+      amount:
+        type: integer
+      orderId:
+        format: uuid
+        type: string
+      serviceId:
+        format: uuid
+        type: string
+      userId:
+        format: uuid
+        type: string
+    required:
+    - amount
+    - orderId
+    - serviceId
+    - userId
+    type: object
+  dto.ReservationFilter:
+    properties:
+      amount:
+        type: integer
+      orderId:
+        format: uuid
+        type: string
+      serviceId:
+        format: uuid
+        type: string
+      userId:
+        format: uuid
+        type: string
+    required:
+    - amount
+    - orderId
+    - serviceId
+    - userId
+    type: object
+  dto.ReservationRead:
+    properties:
+      amount:
+        type: integer
+      createdAt:
+        type: string
+      id:
+        format: uuid
+        type: string
+      orderId:
+        format: uuid
+        type: string
+      serviceId:
+        format: uuid
+        type: string
+      userId:
+        format: uuid
+        type: string
+    type: object
+  dto.TransactionRead:
+    properties:
+      amount:
+        type: integer
+      createdAt:
+        type: string
+      id:
+        format: uuid
+        type: string
+      orderId:
+        format: uuid
+        type: string
+      serviceId:
+        format: uuid
+        type: string
+      status:
+        enum:
+        - pending
+        - approved
+        - rejected
+        type: string
+      type:
+        enum:
+        - accrual
+        - withdrawal
+        - transfer
+        type: string
+      userId:
+        format: uuid
+        type: string
+    type: object
+  dto.UserAccrual:
+    properties:
+      amount:
+        type: integer
+      orderId:
+        format: uuid
+        type: string
+      serviceId:
+        format: uuid
+        type: string
+    required:
+    - amount
+    type: object
+  dto.UserRead:
+    properties:
+      balance:
+        type: integer
+      createdAt:
+        format: date-time
+        type: string
+      id:
+        format: uuid
+        type: string
+    type: object
+  dto.UserTransfer:
+    properties:
+      amount:
+        type: integer
+      userId:
+        format: uuid
+        type: string
+    required:
+    - amount
+    - userId
+    type: object
+  dto.UserWithdrawal:
+    properties:
+      amount:
+        type: integer
+      orderId:
+        format: uuid
+        type: string
+      serviceId:
+        format: uuid
+        type: string
+    required:
+    - amount
+    type: object
+  pkg.Pagination:
+    properties:
+      items: {}
+      page:
+        type: integer
+      size:
+        type: integer
+      total:
+        type: integer
+    type: object
+  utils.JSONError:
+    properties:
+      error:
+        type: boolean
+      message:
+        type: string
+    type: object
+info:
+  contact:
+    email: i@flaiers.me
+    name: Maxim Bigin
+    url: https://flaiers.me
+  description: REST API for working with user balance
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  termsOfService: https://swagger.io/terms
+  title: Flallet API
+  version: "1.0"
+paths:
+  /reports/csv:
+    post:
+      consumes:
+      - application/json
+      operationId: getCSVReport
+      parameters:
+      - description: ' '
+        in: body
+        name: reportFilter
+        required: true
+        schema:
+          $ref: '#/definitions/dto.ReportFilter'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.ReportRead'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/utils.JSONError'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/utils.JSONError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/utils.JSONError'
+      summary: Get CSV Report
+      tags:
+      - reports
+  /reservations:
+    post:
+      consumes:
+      - application/json
+      operationId: createReservation
+      parameters:
+      - description: ' '
+        in: body
+        name: reservationCreate
+        required: true
+        schema:
+          $ref: '#/definitions/dto.ReservationCreate'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/dto.ReservationRead'
+        "402":
+          description: Payment Required
+          schema:
+            $ref: '#/definitions/utils.JSONError'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/utils.JSONError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/utils.JSONError'
+      summary: Create Reservation
+      tags:
+      - reservations
+  /reservations/approve:
+    delete:
+      consumes:
+      - application/json
+      operationId: approveReservation
+      parameters:
+      - description: ' '
+        in: body
+        name: reservationFilter
+        required: true
+        schema:
+          $ref: '#/definitions/dto.ReservationFilter'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.ReservationRead'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/utils.JSONError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/utils.JSONError'
+      summary: Approve Reservation
+      tags:
+      - reservations
+  /reservations/reject:
+    delete:
+      consumes:
+      - application/json
+      operationId: rejectReservation
+      parameters:
+      - description: ' '
+        in: body
+        name: reservationFilter
+        required: true
+        schema:
+          $ref: '#/definitions/dto.ReservationFilter'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.ReservationRead'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/utils.JSONError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/utils.JSONError'
+      summary: Reject Reservation
+      tags:
+      - reservations
+  /transactions:
+    get:
+      consumes:
+      - application/json
+      operationId: readTransactions
+      parameters:
+      - description: ' '
+        format: uuid
+        in: query
+        name: userId
+        required: true
+        type: string
+      - default: 1
+        description: ' '
+        in: query
+        name: page
+        type: integer
+      - default: 50
+        description: ' '
+        in: query
+        name: size
+        type: integer
+      - enum:
+        - asc
+        - desc
+        in: query
+        name: orderByAmount
+        type: string
+      - enum:
+        - asc
+        - desc
+        in: query
+        name: orderByCreatedAt
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/pkg.Pagination'
+            - properties:
+                items:
+                  items:
+                    $ref: '#/definitions/dto.TransactionRead'
+                  type: array
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/utils.JSONError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/utils.JSONError'
+      summary: Read Transactions
+      tags:
+      - transactions
+  /users/{userId}:
+    get:
+      consumes:
+      - application/json
+      operationId: readUserBalance
+      parameters:
+      - description: ' '
+        format: uuid
+        in: path
+        name: userId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.UserRead'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/utils.JSONError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/utils.JSONError'
+      summary: Read User Balance
+      tags:
+      - users
+  /users/{userId}/accrue:
+    post:
+      consumes:
+      - application/json
+      operationId: accrueUserBalance
+      parameters:
+      - description: ' '
+        format: uuid
+        in: path
+        name: userId
+        required: true
+        type: string
+      - description: ' '
+        in: body
+        name: userAccrual
+        required: true
+        schema:
+          $ref: '#/definitions/dto.UserAccrual'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.UserRead'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/utils.JSONError'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/utils.JSONError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/utils.JSONError'
+      summary: Accrue User Balance
+      tags:
+      - users
+  /users/{userId}/transfer:
+    post:
+      consumes:
+      - application/json
+      operationId: transferUserBalance
+      parameters:
+      - description: ' '
+        format: uuid
+        in: path
+        name: userId
+        required: true
+        type: string
+      - description: ' '
+        in: body
+        name: UserTransfer
+        required: true
+        schema:
+          $ref: '#/definitions/dto.UserTransfer'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.UserRead'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/utils.JSONError'
+        "402":
+          description: Payment Required
+          schema:
+            $ref: '#/definitions/utils.JSONError'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/utils.JSONError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/utils.JSONError'
+      summary: Transfer User Balance
+      tags:
+      - users
+  /users/{userId}/withdraw:
+    post:
+      consumes:
+      - application/json
+      operationId: withdrawUserBalance
+      parameters:
+      - description: ' '
+        format: uuid
+        in: path
+        name: userId
+        required: true
+        type: string
+      - description: ' '
+        in: body
+        name: userWithdrawal
+        required: true
+        schema:
+          $ref: '#/definitions/dto.UserWithdrawal'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.UserRead'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/utils.JSONError'
+        "402":
+          description: Payment Required
+          schema:
+            $ref: '#/definitions/utils.JSONError'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/utils.JSONError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/utils.JSONError'
+      summary: Withdraw User Balance
+      tags:
+      - users
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+  BasicAuth:
+    type: basic
+swagger: "2.0"

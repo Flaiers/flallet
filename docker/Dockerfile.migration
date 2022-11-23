@@ -1,0 +1,19 @@
+# Step 1: Modules
+FROM golang:1.19-alpine AS modules
+WORKDIR /modules
+COPY go.mod go.sum ./
+RUN go mod download
+
+# Step 2: Builder
+FROM golang:1.19-alpine as builder
+WORKDIR /build
+COPY . .
+COPY --from=modules /go/pkg /go/pkg
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 \
+    go build -ldflags="-s -w" -o migration cmd/migration/main.go
+
+# Step 3: Final
+FROM alpine:3.16
+WORKDIR /bin
+COPY --from=builder /build/migration .
+CMD ["./migration"]
